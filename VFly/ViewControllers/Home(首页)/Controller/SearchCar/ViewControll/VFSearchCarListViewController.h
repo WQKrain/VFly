@@ -1,0 +1,13 @@
+//
+//  VFSearchCarListViewController.h
+//  LuxuryCar
+//
+//  Created by Hcar on 2017/9/27.
+//  Copyright © 2017年 zY_Wang. All rights reserved.
+//
+
+#import "BaseViewController.h"
+
+@interface VFSearchCarListViewController : UIViewController
+@property (nonatomic , strong)NSString *carModel;
+@end

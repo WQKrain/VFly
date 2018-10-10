@@ -1,0 +1,57 @@
+//
+//  PrefixHeader.pch
+//  VFly
+//
+//  Created by Hcar on 2018/1/24.
+//  Copyright © 2018年 VFly. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import <HelpDeskLite/HelpDeskLite.h>
+#import "HelpDeskUI.h"
+#import <Foundation/Foundation.h>
+#import "Header.h"
+#import "AppConstant.h"
+#import "anyButton.h"
+#import "Masonry.h"
+#import "JSFProgressHUD.h"
+#import "VFDefaultPageView.h"
+#import "HCAlertViewController.h"
+#import "ChangeCityTool.h"
+#import "MJRefresh.h"
+#import "UIButton+Extension.h"        //自定义按钮
+#import "UILabel+Extension.h"         //自定义label
+#import "HttpManage.h"
+#import "CustomTool.h"
+#import <ProgressHUD.h>               // 指示框
+#import "BaseTableView.h"
+#import "GlobalConfigModel.h"
+#import "UIImageView+WebCache.h"      // SDWebImage
+#import "UIButton+WebCache.h"         // SDWebImage
+#import "UIImageView+SDImageFade.h"
+#import "HCBaseMode.h"
+#import "AESCrypt.h"
+#import "UIImage+GIF.h"
+#import "UIView+Category.h"
+#import "VFRegistHXModel.h"
+#import "XLBallLoading.h"
+#import "VFUpoladImageModel.h"
+#import "VFNotificationCityModel.h"
+//#import "BeeCloud.h"                            // 支付
+#import <UMSocialCore/UMSocialCore.h>           // 友盟分享
+#import <UMPush/UMessage.h>                     // Push组件
+#import <UserNotifications/UserNotifications.h> // Push组件必须的系统库
+#import <UMCommon/UMCommon.h>                   // 公共组件是所有友盟产品的基础组件，必选
+#import <UMAnalytics/MobClick.h>                // 友盟统计
+#import "MJDIYHeader.h"                         // 自定义刷新头
+#import "VFHttpRequest.h"                       // 新接口重构请求类
+#import "EasyShowView.h"                        // 加载成功动画类
+#import <FDFullscreenPopGesture/UINavigationController+FDFullscreenPopGesture.h>// 侧滑返回
+#import <SDAutoLayout/SDAutoLayout.h>//自动布局
+
+#endif
+
+#endif /* PrefixHeader_pch */
