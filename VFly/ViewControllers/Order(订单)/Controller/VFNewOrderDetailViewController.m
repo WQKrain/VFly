@@ -801,12 +801,14 @@
     }];
 }
 
+
 - (void)headerButtonClcik{
     VFOrderDetailUsemanModel *obj = [[VFOrderDetailUsemanModel alloc]initWithDic:_detailObj.useman];
     if ([obj.card_status intValue] ==1 && [obj.driving_licence_status intValue] == 1) {
         WebViewVC *vc = [[WebViewVC alloc]init];
         VFOrderDetailUsemanModel *model =  [[VFOrderDetailUsemanModel alloc]initWithDic:_detailObj.useman];
-        vc.urlStr = kFormat(@"https://wechat.weifengchuxing.com/forApp/noDeposit_v2/noDeposit.html?order_id=%@&useman_id=%@&token=",_orderID,model.useman_id);
+        NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
+        vc.urlStr = kFormat(@"https://wechat.weifengchuxing.com/forApp/noDeposit_v2/noDeposit.html?order_id=%@&useman_id=%@&token=%@&test=1",_orderID,model.useman_id, token);
         vc.needToken = YES;
         vc.noNav = YES;
         [self.navigationController pushViewController:vc animated:YES];

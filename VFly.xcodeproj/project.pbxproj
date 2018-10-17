@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		500ED63138CE6A2605721BD3 /* libPods-VFly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4769B50779BD034786DD05CB /* libPods-VFly.a */; };
+		7BA337492175C62E00CB3721 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA337482175C62E00CB3721 /* HomePageViewController.m */; };
+		7BA3374D2175CA3B00CB3721 /* HomePageTopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA3374B2175CA3B00CB3721 /* HomePageTopViewCell.m */; };
+		7BA3374E2175CA3B00CB3721 /* HomePageTopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BA3374C2175CA3B00CB3721 /* HomePageTopViewCell.xib */; };
 		CF04FB542062370D00E94D69 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF04FB532062370C00E94D69 /* MyOrderViewController.m */; };
 		CF04FB572062385A00E94D69 /* MyOrderNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF04FB552062385800E94D69 /* MyOrderNewTableViewCell.m */; };
 		CF04FB5A2062387F00E94D69 /* VFPickUpOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF04FB592062387E00E94D69 /* VFPickUpOrderTableViewCell.m */; };
@@ -622,6 +625,11 @@
 /* Begin PBXFileReference section */
 		35822EEFBF1974A4A80C1B76 /* Pods-VFly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VFly.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VFly/Pods-VFly.debug.xcconfig"; sourceTree = "<group>"; };
 		4769B50779BD034786DD05CB /* libPods-VFly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-VFly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BA337472175C62E00CB3721 /* HomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		7BA337482175C62E00CB3721 /* HomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		7BA3374A2175CA3B00CB3721 /* HomePageTopViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePageTopViewCell.h; sourceTree = "<group>"; };
+		7BA3374B2175CA3B00CB3721 /* HomePageTopViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePageTopViewCell.m; sourceTree = "<group>"; };
+		7BA3374C2175CA3B00CB3721 /* HomePageTopViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePageTopViewCell.xib; sourceTree = "<group>"; };
 		CF04FB522062370A00E94D69 /* MyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
 		CF04FB532062370C00E94D69 /* MyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
 		CF04FB552062385800E94D69 /* MyOrderNewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderNewTableViewCell.m; sourceTree = "<group>"; };
@@ -3044,6 +3052,8 @@
 				CF4F5A02206B85A300FFB329 /* WebViewVC.m */,
 				CFD43DA0209315B9006D8C23 /* DriveTravelViewController.h */,
 				CFD43DA1209315B9006D8C23 /* DriveTravelViewController.m */,
+				7BA337472175C62E00CB3721 /* HomePageViewController.h */,
+				7BA337482175C62E00CB3721 /* HomePageViewController.m */,
 				CF593FF120663A8F00FD67D3 /* partner */,
 				CF593FC02065061A00FD67D3 /* activity */,
 				CFA40929204D19D900C9E5DC /* FreeDeposit(免押金) */,
@@ -3089,6 +3099,9 @@
 				CFE7794B202EC25700C113D7 /* BaseTableViewCell.m */,
 				F108B62521460AC8005D1E55 /* HomeSelectCell.h */,
 				F108B62621460AC8005D1E55 /* HomeSelectCell.m */,
+				7BA3374A2175CA3B00CB3721 /* HomePageTopViewCell.h */,
+				7BA3374B2175CA3B00CB3721 /* HomePageTopViewCell.m */,
+				7BA3374C2175CA3B00CB3721 /* HomePageTopViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4632,7 +4645,7 @@
 				TargetAttributes = {
 					CF5B28542015D9CA0035D16A = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4716,6 +4729,7 @@
 				CF4F59CD206B375300FFB329 /* list2@3x.png in Resources */,
 				CFFC40B62047A4390000C195 /* IntegralShowTableViewCell.xib in Resources */,
 				CF4F59CF206B375300FFB329 /* list@3x.png in Resources */,
+				7BA3374E2175CA3B00CB3721 /* HomePageTopViewCell.xib in Resources */,
 				CF4F596F206B375300FFB329 /* bg_rl_satisfaction.png in Resources */,
 				CF4F59B8206B375300FFB329 /* em_main_introduce_en.png in Resources */,
 				CF4F59CE206B375300FFB329 /* list@2x.png in Resources */,
@@ -4905,6 +4919,7 @@
 				CFE77992202ECA6500C113D7 /* VFChooseCityViewController.m in Sources */,
 				CF4F595A206B375300FFB329 /* UIButton+EMWebCache.m in Sources */,
 				CFA9CB2C2084736D000C8691 /* VFNewOrderDetailViewController.m in Sources */,
+				7BA3374D2175CA3B00CB3721 /* HomePageTopViewCell.m in Sources */,
 				CF4FAD3F203040780076D632 /* MyDataViewController.m in Sources */,
 				CFFC41222047F72D0000C195 /* HCBankCardViewController.m in Sources */,
 				CFA9CB1C20843779000C8691 /* EasyLodingGlobalConfig.m in Sources */,
@@ -5098,6 +5113,7 @@
 				CFFC4205204946650000C195 /* VFSearchCarListViewController.m in Sources */,
 				CF4F5966206B375300FFB329 /* PSTCollectionViewFlowLayout.m in Sources */,
 				CFA40921204D15AD00C9E5DC /* CustomApplyAlertView.m in Sources */,
+				7BA337492175C62E00CB3721 /* HomePageViewController.m in Sources */,
 				CF4F5968206B375300FFB329 /* PSTCollectionViewLayout.m in Sources */,
 				CFFC41F22048FE280000C195 /* VFMessageCountModel.m in Sources */,
 				CFE7799F202ECC2A00C113D7 /* HotCarModel.m in Sources */,
@@ -5487,7 +5503,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VFly/VFly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7QE575992J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5518,7 +5534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sxz.VFly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "vfly-dev-2018-10-10";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -5530,7 +5546,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = VFly/VFly.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 7QE575992J;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5561,7 +5577,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sxz.VFly;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "vfly-dev-2018-10-10";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

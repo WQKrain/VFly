@@ -1149,9 +1149,9 @@
     NSString *tokenStr = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
     NSString *token = tokenStr? tokenStr:@"0";
     NSDictionary *parameters = [NSDictionary dictionary];
-    parameters = @{@"carId":carId,@"token":token};
-    [HttpRequest getWithUrlString:@"starCar" parameters:parameters success:^(id data) {
-        NSString *status = data[@"data"][@"isStar"];
+        parameters = @{@"carId":carId,@"token":token};
+        [HttpRequest postWithUrlString:@"c/star/car" parameters:parameters success:^(id data) {
+            NSString *status = [NSString stringWithFormat:@"%@", data[@"data"][@"isStar"]];
         if (statusBlock) {
             statusBlock(status);
         }
@@ -1159,7 +1159,7 @@
         NSError *underError = error.userInfo[@"NSUnderlyingError"];
         NSData *responseData = underError.userInfo[@"com.alamofire.serialization.response.error.data"];
         NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        [ProgressHUD showError:@"操作失败失败"];
+        [ProgressHUD showError:@"操作失败"];
     }];
 }
 

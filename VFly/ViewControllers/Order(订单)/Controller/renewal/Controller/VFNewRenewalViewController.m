@@ -109,6 +109,7 @@
         VFRenewPayDetailCarModel *modle = [[VFRenewPayDetailCarModel alloc]initWithDic:_payModel.car];
         [_carImage sd_setImageWithURL:[NSURL URLWithString:modle.img] placeholderImage:[UIImage imageNamed:@"place_holer_750x500"]];
         _carLabel.text = kFormat(@"%@%@",modle.brand, modle.model);
+        //wqk
         _priceLabel.text = kFormat(@"¥%@元/天", _payModel.re_day_rental);
         _allMoneylabel.text = kFormat(@"预估总金额  ¥%d", [_payModel.re_day_rental intValue]*[_renewDays intValue]);
         NSString *contentStr = @"¥";
@@ -354,10 +355,12 @@
         NSString *endStr = [NSString stringWithFormat:@"%@ %@",_backTime.text,_backClock.text];
         [self.timeV setNowTime:endStr];
     }else{
+        //wqk
         VFRenewalChosseDaysViewController *vc =[[VFRenewalChosseDaysViewController alloc]init];
         vc.delegate = self;
         vc.dataModel = _renewMapModel;
         vc.rentDays = _renewDays;
+        vc.detailObj = _detailObj;
         [self presentViewController:vc animated:YES completion:nil];
     }
 }
@@ -414,6 +417,7 @@
         _backClock.text = _rentClock.text;
         long days = (late1-late2)/86400;
         _rentDaylabel.text = kFormat(@"%ld天", days);
+        [self calculateAllmoneyDay:kFormat(@"%ld", days)];
     }
 }
 

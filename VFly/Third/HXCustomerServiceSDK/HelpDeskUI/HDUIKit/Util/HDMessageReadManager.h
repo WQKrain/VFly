@@ -29,7 +29,7 @@ typedef void (^PlayBlock)(BOOL playing, HDMessageModel *messageModel);
 + (id)defaultManager;
 
 //default
-- (void)showBrowserWithImages:(NSArray *)imageArray;
+- (void)showBrowserWithImages:(NSArray *)imageArray viewController:(UIViewController *)viewController;
 
 - (BOOL)prepareMessageAudioModel:(HDMessageModel *)messageModel
             updateViewCompletion:(void (^)(HDMessageModel *prevAudioModel, HDMessageModel *currentAudioModel))updateCompletion;

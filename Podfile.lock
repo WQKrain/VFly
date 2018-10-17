@@ -79,7 +79,7 @@ DEPENDENCIES:
   - YYModel
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - BeeCloud
     - CYLTabBarController
@@ -121,6 +121,6 @@ SPEC CHECKSUMS:
   YTKNetwork: df8a7a5597bda1664a4efaa7ef871a818a887fe0
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 153ee8cd7eed0124ef32fde73cbecf1223398575
+PODFILE CHECKSUM: a9d9207df906696e4492a3b15e1b32214ca28247
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

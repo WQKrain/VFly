@@ -168,9 +168,12 @@
             breaksMoney = payMoney *(1-[model.zk floatValue]);
         }
     }
-    _allRentMoneyLabel.text = kFormat(@"总租金 ¥%.2f",payMoney);
-    _breaksMoneyLabel.text = kFormat(@"已优惠 ¥%.2f", breaksMoney);
-    _dayRentLabel.text = kFormat(@"日租金 ¥%.2f",payMoney/day);
+//    _allRentMoneyLabel.text = kFormat(@"总租金 ¥%.2f",payMoney);
+//    _breaksMoneyLabel.text = kFormat(@"已优惠 ¥%.2f", breaksMoney);
+//    _dayRentLabel.text = kFormat(@"日租金 ¥%.2f",payMoney/day);
+    
+    _dayRentLabel.text = kFormat(@"日租金 ¥%@",_detailObj.re_day_rental);
+    _allRentMoneyLabel.text = kFormat(@"总租金 ¥%d",[_detailObj.re_day_rental intValue] *[days intValue]);
 }
 
 - (void)cancelButtonClick{

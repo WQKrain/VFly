@@ -8,6 +8,7 @@
 
 #import "HttpRequest.h"
 #import "HCBaseMode.h"
+#import "HttpManage.h"
 
 //#define kNewBaseApi         api_root
 @implementation HttpRequest
@@ -35,9 +36,9 @@
 +(void)getWithUrlString:(NSString *)urlString parameters:(NSDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure{
     //创建请求管理者
     NSString *urlStr = kFormat(@"%@%@", kNewBaseApi,urlString);
-//    AFHTTPSessionManager * manager = [[self class] getCustomHttpsPolicyWithUrlStr:urlStr];
+    AFHTTPSessionManager *manager = [[self class] getCustomHttpsPolicyWithUrlStr:urlStr];
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlStr]];
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlStr]];
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"client"];
@@ -96,7 +97,7 @@
 }
 
 
-
+/*
 + (AFHTTPSessionManager *)getCustomHttpsPolicyWithUrlStr:(NSString *)urlStr
 {
     AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
@@ -185,6 +186,30 @@
     
     return manager;
 }
+*/
 
+
++ (AFHTTPSessionManager *)getCustomHttpsPolicyWithUrlStr:(NSString *)urlStr
+{
+    AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    securityPolicy.allowInvalidCertificates = YES;      //是否允许使用¥
+    securityPolicy.validatesDomainName = NO;           //是否需要验证域名
+    AFHTTPSessionManager * manager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:urlStr]];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.securityPolicy = securityPolicy;
+    manager.responseSerializer.acceptableContentTypes  = [NSSet setWithObjects:@"application/xml",@"text/html",@"text/xml",@"text/plain",@"application/json",nil];
+    [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"client"];
+    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
+    if (token)
+    {
+        [manager.requestSerializer setValue:kFormat(@"Bearer %@", token)  forHTTPHeaderField:@"Authorization"];
+    }
+    [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"client"];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    [manager.requestSerializer setValue:@"application/x.VFLY.v2+json" forHTTPHeaderField:@"Accept"];
+    manager.requestSerializer.timeoutInterval = 15.f;
+    return manager;
+}
 
 @end

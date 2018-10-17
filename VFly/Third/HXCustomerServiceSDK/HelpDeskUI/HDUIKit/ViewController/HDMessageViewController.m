@@ -43,7 +43,7 @@
 }
 @end
 
-@interface HDMessageViewController ()<HDMessageCellDelegate,HChatDelegate,UIGestureRecognizerDelegate,TransmitDeleteTrackMsgDelegate>
+@interface HDMessageViewController ()<HDMessageCellDelegate,HChatDelegate,UIGestureRecognizerDelegate,TransmitDeleteTrackMsgDelegate, UIAlertViewDelegate>
 {
     UIMenuItem *_copyMenuItem;
     UIMenuItem *_deleteMenuItem;
@@ -188,6 +188,16 @@
     UIBarButtonItem *nagetiveSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     nagetiveSpacer.width = - 16;
     self.navigationItem.leftBarButtonItems = @[nagetiveSpacer,backItem];
+    
+    UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 19)];
+    clearButton.accessibilityIdentifier = @"clear_message";
+    [clearButton setImage:[UIImage imageNamed:@"hd_chat_delete_icon"] forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(deleteAllMessages:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *clearItem = [[UIBarButtonItem alloc] initWithCustomView:clearButton];
+    UIBarButtonItem *clearNagetiveSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    clearNagetiveSpacer.width = -5;
+    self.navigationItem.rightBarButtonItems = @[clearNagetiveSpacer,clearItem];
+
 }
 
 - (void)backItemClicked {
@@ -198,6 +208,43 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     [self backItemDidClicked];
 }
+
+- (void)deleteAllMessages:(id)sender {
+    if (self.dataArray.count == 0) {
+        [self showHint:NSLocalizedString(@"message.noMessage", @"no messages")];
+        return;
+    }
+    if ([sender isKindOfClass:[NSNotification class]]) {
+        NSString *chattingID = (NSString *)[(NSNotification *)sender object];
+        BOOL isDelete = [chattingID isEqualToString:self.conversation.conversationId];
+        if (isDelete) {
+            self.messageTimeIntervalTag = -1;
+            [self.conversation deleteAllMessages:nil];
+            [self.messsagesSource removeAllObjects];
+            [self.dataArray removeAllObjects];
+            [self.tableView reloadData];
+            [self showHint:NSLocalizedString(@"message.noMessage", @"no messages")];
+        }
+    }
+    else if ([sender isKindOfClass:[UIButton class]]){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompta", @"Prompt") message:NSLocalizedString(@"sureToDelete", @"please make sure to delete") delegate:self cancelButtonTitle:NSLocalizedString(@"cancela", @"Cancel") otherButtonTitles:NSLocalizedString(@"ok", @"OK"), nil];
+        [alertView show];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.cancelButtonIndex != buttonIndex) {
+        self.messageTimeIntervalTag = -1;
+        [self.conversation deleteAllMessages:nil];
+        [self.dataArray removeAllObjects];
+        [self.messsagesSource removeAllObjects];
+        [self.tableView reloadData];
+    }
+}
+
 
 - (void)backItemDidClicked {
     
@@ -617,7 +664,7 @@
                     
                     if (image)
                     {
-                        [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image]];
+                        [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image] viewController:self];
                     }
                     else
                     {
@@ -637,7 +684,7 @@
                         //                                weakSelf.isScrollToBottom = NO;
                         if (image)
                         {
-                            [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image]];
+                            [[HDMessageReadManager defaultManager] showBrowserWithImages:@[image] viewController:self];
                         }
                         else
                         {

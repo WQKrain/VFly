@@ -53,11 +53,12 @@
 #import "RentCarViewController.h"
 #import "CityModel.h"
 #import "HomeSelectCell.h"
+#import "SDCycleScrollView.h"
 
 #define VIEW_WIDTH self.view.bounds.size.width
 #define VIEW_HIGHT self.view.bounds.size.height
 
-@interface HomeGroupedViewController () <CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource,UIScrollViewDelegate>
+@interface HomeGroupedViewController () <CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource,UIScrollViewDelegate, LoginViewControllerDelegate, SDCycleScrollViewDelegate>
 @property (nonatomic, strong) UITableView *tableView; // tableView
 @property (nonatomic, strong) NSMutableArray *tableDatasM; // 数据源
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -105,13 +106,13 @@
     {
         return;
     }
-    //request_____用的到
-    [VFHttpRequest messageUnreadParameter:nil successBlock:^(NSDictionary *data) {
-        NSLog(@"request_____0");
-        VFBaseMode *model = [[VFBaseMode alloc]initWithDic:data];
-        if ([model.code intValue] == 1) {
-            VFMessageCountListModel *obj = [[VFMessageCountListModel alloc]initWithDic:model.data];
-            NSArray<HConversation *> *conversastions = [[HChatClient sharedClient].chatManager loadAllConversations];
+        //request_____用的到
+        [VFHttpRequest messageUnreadParameter:nil successBlock:^(NSDictionary *data) {
+                NSLog(@"request_____0");
+            VFBaseMode *model = [[VFBaseMode alloc]initWithDic:data];
+            if ([model.code intValue] == 1) {
+                VFMessageCountListModel *obj = [[VFMessageCountListModel alloc]initWithDic:model.data];
+                NSArray<HConversation *> *conversastions = [[HChatClient sharedClient].chatManager loadAllConversations];
             if (conversastions && conversastions.count>0) {
                 HConversation *message = conversastions[0];
                 if ([obj.wallet intValue]>0 || [obj.order intValue]>0 || message.unreadMessagesCount>0) {
@@ -360,8 +361,15 @@
             }
             else if (a == 3)
             {
-                VFCarApplyViewController *vc = [[VFCarApplyViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
+                NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
+                if (token) {
+                    VFCarApplyViewController *vc = [[VFCarApplyViewController alloc]init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    LoginViewController *vc = [[LoginViewController alloc]init];
+                    vc.delegate = self;
+                    [self presentViewController:vc animated:YES completion:nil];
+                }
             }
         };
         
@@ -404,6 +412,19 @@
     return cell;
 }
 
+    
+- (void)loginViewControllerCallback{
+    NSString *token = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
+    if (token) {
+        VFCarApplyViewController *vc = [[VFCarApplyViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        LoginViewController *vc = [[LoginViewController alloc]init];
+        vc.delegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+}
+    
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 3)
@@ -431,6 +452,13 @@
         self.lineImage.alpha = 0;
     }
 }
+
+#pragma mark 轮播图点击事件
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    
+    
+}
+
 
 - (void)checkVip {
     kWeakself;
@@ -785,16 +813,27 @@
     [_tableHeaderView addSubview:_navBackImageView];
     _navBackImageView.frame = CGRectMake(15, 0, kScreenW-30, 30);
     
-    _lunScroll = [[CustomScrollView alloc]initWithArr:self.headerArray WithHeight:kScreenW/15.0 * 8];
-    _lunScroll.frame = CGRectMake(0, 0, kScreenW, kScreenW/15.0 * 8);
-    _lunScroll.buttonClickBlock = ^(NSInteger tag){
-        [weakSelf homeBananaChooseJump:weakSelf.actionArr[tag-1] url:weakSelf.urlArr[tag-1]];
-    };
+//    _lunScroll = [[CustomScrollView alloc]initWithArr:self.headerArray WithHeight:kScreenW/15.0 * 8];
+//    _lunScroll.frame = CGRectMake(0, 0, kScreenW, kScreenW/15.0 * 8);
+//    _lunScroll.buttonClickBlock = ^(NSInteger tag){
+//        [weakSelf homeBananaChooseJump:weakSelf.actionArr[tag-1] url:weakSelf.urlArr[tag-1]];
+//    };
+//    [_tableHeaderView addSubview:_lunScroll];
     
-    [_lunScroll addSubview:self.areaButton];
+    
+    SDCycleScrollView *cycleView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenW, kScreenW/15.0 * 8) delegate:self placeholderImage:[UIImage imageNamed:@""]];
+    cycleView.imageURLStringsGroup = self.headerArray;
+    cycleView.autoScrollTimeInterval = 3;
+    [_tableHeaderView addSubview:cycleView];
+    
+//    SDCycleScrollView *cycleScrollView = [cycleScrollViewWithFrame:CGRectMake(0, 0, kScreenW, kScreenW/15.0 * 8) delegate:self placeholderImage:placeholderImage];
+//    cycleScrollView.imageURLStringsGroup = imagesURLStrings;
+    
+    [cycleView addSubview:self.areaButton];
+
     self.areaButton.sd_layout
-    .leftSpaceToView(_lunScroll, 20)
-    .topSpaceToView(_lunScroll, 55)
+    .leftSpaceToView(cycleView, 20)
+    .topSpaceToView(cycleView, 55)
     .minWidthIs(200)
     .heightIs(25);
     [self.areaButton setupAutoSizeWithHorizontalPadding:5 buttonHeight:25];
@@ -805,10 +844,10 @@
     [_rightNavBtn setImage:[UIImage imageNamed:@"home_icon_message"] forState:UIControlStateNormal];
     [_rightNavBtn.titleLabel setFont:[UIFont systemFontOfSize:kTextSize]];
     [_rightNavBtn addTarget:self action:@selector(callBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_lunScroll addSubview:_rightNavBtn];
+    [cycleView addSubview:_rightNavBtn];
     _rightNavBtn.sd_layout
-    .rightSpaceToView(_lunScroll, 20)
-    .topSpaceToView(_lunScroll, 50)
+    .rightSpaceToView(cycleView, 20)
+    .topSpaceToView(cycleView, 50)
     .heightIs(50)
     .widthIs(50);
     
@@ -831,10 +870,10 @@
     [searchButton setImage:[UIImage imageNamed:@"home_icon_search"] forState:UIControlStateNormal];
     [searchButton.titleLabel setFont:[UIFont systemFontOfSize:kTextSize]];
     [searchButton addTarget:self action:@selector(searchbuttonClick) forControlEvents:UIControlEventTouchUpInside];
-    [_lunScroll addSubview:searchButton];
+    [cycleView addSubview:searchButton];
     searchButton.sd_layout
-    .rightSpaceToView(_lunScroll, 70)
-    .topSpaceToView(_lunScroll, 50)
+    .rightSpaceToView(cycleView, 70)
+    .topSpaceToView(cycleView, 50)
     .heightIs(50)
     .widthIs(50);
     
@@ -843,7 +882,7 @@
     
     
     _tableHeaderView.frame = CGRectMake(0, 0, kScreenW, kScreenW/15.0 * 8);
-    [_tableHeaderView addSubview:_lunScroll];
+    
     return _tableHeaderView;
 }
 

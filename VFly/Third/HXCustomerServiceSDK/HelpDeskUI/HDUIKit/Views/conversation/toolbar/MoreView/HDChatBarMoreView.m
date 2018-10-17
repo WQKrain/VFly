@@ -120,7 +120,7 @@
     [_scrollview addSubview:_takePicButton];
     
     _takeLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets * 2 + CHAT_BUTTON_SIZE * 1, 10 + CHAT_BUTTON_SIZE, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
-    _takeLabel.text = NSLocalizedString(@"attach_picture", @"Image");
+    _takeLabel.text = NSLocalizedString(@"attach_take_pic", @"Image");
     _takeLabel.font = [UIFont systemFontOfSize:10];
     _takeLabel.textAlignment = UITextAlignmentCenter;
     _takeLabel.textColor = [UIColor blackColor];
@@ -136,52 +136,52 @@
 //    _audioCallButton.tag = MOREVIEW_BUTTON_TAG + 3;
 //    [_scrollview addSubview:_audioCallButton];
 //    
-    _videoCallButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
-    [_videoCallButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_normal"] forState:UIControlStateNormal];
-    [_videoCallButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_pressed"] forState:UIControlStateHighlighted];
-    [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
-    _videoCallButton.tag =MOREVIEW_BUTTON_TAG + 2;
-    _maxIndex = 2;
-    [_scrollview addSubview:_videoCallButton];
-    
-    _videoCallLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10 + CHAT_BUTTON_SIZE, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
-    _videoCallLabel.text = NSLocalizedString(@"attach_call_video", @"Call Video");
-    _videoCallLabel.font = [UIFont systemFontOfSize:10];
-    _videoCallLabel.textAlignment = NSTextAlignmentCenter;
-    _videoCallLabel.textColor = [UIColor blackColor];
-    [_scrollview addSubview:_videoCallLabel];
+//    _videoCallButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//    [_videoCallButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
+//    [_videoCallButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_normal"] forState:UIControlStateNormal];
+//    [_videoCallButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_video_pressed"] forState:UIControlStateHighlighted];
+//    [_videoCallButton addTarget:self action:@selector(takeVideoCallAction) forControlEvents:UIControlEventTouchUpInside];
+//    _videoCallButton.tag =MOREVIEW_BUTTON_TAG + 2;
+//    _maxIndex = 2;
+//    [_scrollview addSubview:_videoCallButton];
+//
+//    _videoCallLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10 + CHAT_BUTTON_SIZE, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
+//    _videoCallLabel.text = NSLocalizedString(@"attach_call_video", @"Call Video");
+//    _videoCallLabel.font = [UIFont systemFontOfSize:10];
+//    _videoCallLabel.textAlignment = NSTextAlignmentCenter;
+//    _videoCallLabel.textColor = [UIColor blackColor];
+//    [_scrollview addSubview:_videoCallLabel];
     
     _locationButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [_locationButton setFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE * 3, 10, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
+    [_locationButton setFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
     [_locationButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_normal"] forState:UIControlStateNormal];
     [_locationButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/hd_chat_location_pressed"] forState:UIControlStateHighlighted];
     [_locationButton addTarget:self action:@selector(locationAction) forControlEvents:UIControlEventTouchUpInside];
     _locationButton.tag = MOREVIEW_BUTTON_TAG + 3;
     [_scrollview addSubview:_locationButton];
     
-    _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets * 4 + CHAT_BUTTON_SIZE * 3, 10 + CHAT_BUTTON_SIZE, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
+    _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets * 3 + CHAT_BUTTON_SIZE * 2, 10 + CHAT_BUTTON_SIZE, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
     _locationLabel.text = NSLocalizedString(@"attach_location", @"Location");
     _locationLabel.font = [UIFont systemFontOfSize:10];
     _locationLabel.textAlignment = NSTextAlignmentCenter;
     _locationLabel.textColor = [UIColor blackColor];
     [_scrollview addSubview:_locationLabel];
     
-    _leaveMessageButton =[UIButton buttonWithType:UIButtonTypeCustom];
-    [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE + 15, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
-    [_leaveMessageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_normal"] forState:UIControlStateNormal];
-    [_leaveMessageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_pressed"] forState:UIControlStateHighlighted];
-    [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
-    _leaveMessageButton.tag = MOREVIEW_BUTTON_TAG + 4;
-    _maxIndex = 4;
-    [_scrollview addSubview:_leaveMessageButton];
-    
-    _leaveMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE*2 + 15, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
-    _leaveMessageLabel.text = NSLocalizedString(@"leave_title", @"Note");
-    _leaveMessageLabel.font = [UIFont systemFontOfSize:10];
-    _leaveMessageLabel.textAlignment = NSTextAlignmentCenter;
-    _leaveMessageLabel.textColor = [UIColor blackColor];
-    [_scrollview addSubview:_leaveMessageLabel];
+//    _leaveMessageButton =[UIButton buttonWithType:UIButtonTypeCustom];
+//    [_leaveMessageButton setFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE + 15, CHAT_BUTTON_SIZE , CHAT_BUTTON_SIZE)];
+//    [_leaveMessageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_normal"] forState:UIControlStateNormal];
+//    [_leaveMessageButton setImage:[UIImage imageNamed:@"HelpDeskUIResource.bundle/em_chat_phrase_pressed"] forState:UIControlStateHighlighted];
+//    [_leaveMessageButton addTarget:self action:@selector(leaveMessageAction) forControlEvents:UIControlEventTouchUpInside];
+//    _leaveMessageButton.tag = MOREVIEW_BUTTON_TAG + 4;
+//    _maxIndex = 4;
+//    [_scrollview addSubview:_leaveMessageButton];
+//
+//    _leaveMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(insets, 10 * 2 + CHAT_BUTTON_SIZE*2 + 15, CHAT_LABEL_SIZE_WIDTH , CHAT_LABEL_SIZE_HEIGHT)];
+//    _leaveMessageLabel.text = NSLocalizedString(@"leave_title", @"Note");
+//    _leaveMessageLabel.font = [UIFont systemFontOfSize:10];
+//    _leaveMessageLabel.textAlignment = NSTextAlignmentCenter;
+//    _leaveMessageLabel.textColor = [UIColor blackColor];
+//    [_scrollview addSubview:_leaveMessageLabel];
     
     self.frame = frame;
     _scrollview.frame = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));

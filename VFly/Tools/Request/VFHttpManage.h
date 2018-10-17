@@ -29,4 +29,6 @@ typedef void (^HttpFailure)(NSError *error);
 //DELETE请求
 +(void)deleteWithUrlString:(NSString *)urlString parameters:(NSDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure;
 
++ (AFHTTPSessionManager *)getCustomHttpsPolicyWithUrlStr:(NSString *)urlStr;
+
 @end

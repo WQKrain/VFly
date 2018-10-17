@@ -147,7 +147,10 @@
                 _bottomFenbiPayView.hidden = YES;
                 _headerView.height = _headerView.height - 45;
             }else{
-                if (![self.moneyType isEqualToString:@"5"]) {
+                //wqk
+                if ([self.moneyType isEqualToString:@"5"] || [self.moneyType isEqualToString:@"8"]) {
+                    _bottomFenbiPayView.hidden = YES;
+                } else {
                     if ([self.moneyType isEqualToString:@"11"]) {
                         _bottomFenbiPayView.hidden = YES;
                     }else{
@@ -161,6 +164,20 @@
                         }
                     }
                 }
+//                if (![self.moneyType isEqualToString:@"5"] ) {
+//                        if ([self.moneyType isEqualToString:@"11"]) {
+//                            _bottomFenbiPayView.hidden = YES;
+//                        }else{
+//                            _bottomFenbiPayView.hidden = NO;
+//                            if (_isFenqiPay) {
+//                                _bottomFenbiPayView.hidden = NO;
+//                            }
+//                            else
+//                            {
+//                                _bottomFenbiPayView.hidden = YES;
+//                            }
+//                        }
+//                    }
             }
             
             [_tabelView reloadData];
@@ -383,7 +400,7 @@
             }
         }
         
-        if ([self.moneyType isEqualToString:@"5"] || [self.moneyType isEqualToString:@"11"]) {
+        if ([self.moneyType isEqualToString:@"5"] || [self.moneyType isEqualToString:@"11"] || [self.moneyType isEqualToString:@"8"]) {
             _headerView.frame = CGRectMake(0, 0, kScreenW, 90);
             _preferentialView.hidden = YES;
             _bottomFenbiPayView.hidden = YES;

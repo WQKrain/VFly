@@ -1,5 +1,7 @@
 platform :ios, '8.0'
 
+inhibit_all_warnings!
+
 target 'VFly' do
   pod 'AFNetworking'
   pod 'SDWebImage'

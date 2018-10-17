@@ -72,7 +72,11 @@
         [_headerImage sd_setImageWithURL:[NSURL URLWithString:_vipModel.avatar] placeholderImage:nil];
         NSInteger vip = [_vipModel.vipLevel integerValue];
         _namelabel.text= [NSString stringWithFormat:@"%@",_vipModel.name];
-        _VIPIcon.image = _iconArr[vip-1];
+        //wqk
+        if (vip >= 1) {
+            _VIPIcon.image = _iconArr[vip-1];
+        }
+        
         [_namelabel mas_updateConstraints:^(MASConstraintMaker *make) {
             [_namelabel sizeToFit];
             make.width.mas_equalTo(_namelabel.width);

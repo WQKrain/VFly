@@ -121,7 +121,7 @@
     [manager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"client"];
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-     [manager.requestSerializer setValue:@"application/x.VFLY.v2+json" forHTTPHeaderField:@"Accept"];
+    [manager.requestSerializer setValue:@"application/x.VFLY.v2+json" forHTTPHeaderField:@"Accept"];
     manager.requestSerializer.timeoutInterval = 15.f;
     return manager;
 }

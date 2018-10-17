@@ -981,10 +981,10 @@
         //微信、支付宝、银联支付成功
         switch (_BeeCloudChoosePay) {
             case 0:
-                payType = @"支付宝支付";
+                payType = @"微信支付";
                 break;
             case 1:
-                payType = @"微信支付";
+                payType = @"支付宝支付";
                 break;
             default:
                 break;

@@ -167,6 +167,8 @@ NSString * const SecCustCell = @"VFFromTheDepositTableViewCell";
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             VFBaseMode *model = [[VFBaseMode alloc]initWithDic:data];
             _carDetailmodel = [[VFCarDetailModel alloc]initWithDic:model.data];
+            NSDictionary *meta = data[@"meta"];
+            _carDetailmodel.isStar = [NSString stringWithFormat:@"%@", meta[@"isStar"]];
             [self createView];
             [self createNavBar:kFormat(@"%@%@", _carDetailmodel.brand,_carDetailmodel.model)];
             _cycleScrollView.imageURLStringsGroup = _carDetailmodel.images;
@@ -843,15 +845,14 @@ NSString * const SecCustCell = @"VFFromTheDepositTableViewCell";
         NSString *tokenStr = [[NSUserDefaults standardUserDefaults]objectForKey:access_Token];
         if (tokenStr)
         {
-            sender.selected = !sender.selected;
-            if (sender.selected)
+            if (!sender.selected)
             {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [HttpManage favoriteCollectioCarWithCarId:weakSelf.carId withBlock:^(NSString *status) {
                         if ([status isEqualToString:@"1"])
                         {
-                            
                             [ProgressHUD showSuccess:@"已收藏"];
+                            sender.selected = !sender.selected;
                         }
                         else
                         {
@@ -869,6 +870,7 @@ NSString * const SecCustCell = @"VFFromTheDepositTableViewCell";
                         if ([status isEqualToString:@"0"])
                         {
                             [ProgressHUD showSuccess:@"取消收藏"];
+                            sender.selected = !sender.selected;
                         }
                         else
                         {
